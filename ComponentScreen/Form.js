@@ -1,16 +1,38 @@
 import React,{useState, useEffect, Component} from 'react';
 import {Text, View, StyleSheet, TextInput, TouchableOpacity,  ActivityIndicator, FlatList} from 'react-native';
 
-function make_Api_Call({name,surname}) {
+export default class Form extends Component{
 
-    if( Validate_fields({name, surname})){
-      alert("clicked")
+    constructor(props){
+        super(props)
+        this.state = {
+            name: "",
+            surname: ""
+        }
+    }
+
+make_Api_Call=()=>{
+    const {name, surname}= this.state;
+    if( this.Validate_fields()){
+    //   alert("clicked")
+
+    const requestOptions = {
+        
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({name, surname })
+    };
+    fetch('https://6018db6e971d850017a4052d.mockapi.io/data', requestOptions)
+        .then(response => response.json())
+        .then(data => this.setState({ postId: data.id }));
 }
 
 }
 
 
-const Validate_fields=({name,surname})=>{
+Validate_fields=()=>{
+
+    const {name, surname}= this.state;
 
 if(name==""){
 alert("Please enter first name");
@@ -22,35 +44,34 @@ else
 return true;
 }
 
+render(){
 
-const Form = ()=> {
-
-    const [name, setName] = useState("")
-    const [surname, setSurname] = useState("")
+    // const [name, setName] = useState("")
+    // const [surname, setSurname] = useState("")
 
     return (
             <View style = {styles.ViewStyle}>
                 <TextInput style = {styles.InputStyle} placeholder = {" FirstName"}  autoCorrect= {false}
                 // value = {name}
-                onChangeText = {(name) => setName(name)}
+                onChangeText = {(value) => this.setState({name: value})}
                 >    
                 </TextInput>
 
 
                 <TextInput style = {styles.InputStyle} placeholder = {"SurName"} autoCorrect= {false}
-                 onChangeText = {(surname) => setSurname(surname)}
+                 onChangeText = {(value) => this.setState({surname: value})}
                 >
 
                 </TextInput>
-                <TouchableOpacity style = {styles.ButtonStyle} onPress = {()=>make_Api_Call({name,surname})}>
+                <TouchableOpacity style = {styles.ButtonStyle} onPress = {()=>this.make_Api_Call()}>
                     <Text style = {{color: 'white'}}>Submit</Text>
                 </TouchableOpacity>
 
                 <Text>
-                name is {name}
+                name is {this.state.name}
                 </Text>
                 <Text>
-                Surname is {surname}
+                Surname is {this.state.surname}
                 </Text>
                 <Text>
                     data is :{}
@@ -61,8 +82,8 @@ const Form = ()=> {
            
     );
 }
-
-const styles= StyleSheet.create({
+}
+styles= StyleSheet.create({
 
 ViewStyle: {
     height: '100%',
@@ -92,4 +113,3 @@ marginTop: '5%'
 })
 
 
-export default Form;

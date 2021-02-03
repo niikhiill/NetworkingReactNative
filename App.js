@@ -1,15 +1,19 @@
+import 'react-native-gesture-handler';
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import {View, StyleSheet, Text} from 'react-native';
 import Form from './ComponentScreen/Form';
 import GetFormData from './ComponentScreen/GetFromData';
 import MovieExample from './ComponentScreen/MovieExample';
 
+
+
 const App = ()=> {
   return(
     // <View style = {styles.ViewStyle}>
   //  <MovieExample/>
-<Form/>
-//<GetFormData/>
+//<Form/>
+<GetFormData/>
     // </View>
   );
 }
