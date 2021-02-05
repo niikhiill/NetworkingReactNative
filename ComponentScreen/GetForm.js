@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, Text, View } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 
-const GetFormData = () => {
+const GetForm = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -26,4 +26,4 @@ const GetFormData = () => {
     );
 };
 
-export default GetFormData;
+export default GetForm;
