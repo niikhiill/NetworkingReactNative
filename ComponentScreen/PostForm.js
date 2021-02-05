@@ -43,8 +43,10 @@ Validate_fields=()=>{
     alert("Please enter last name");
     return false}
 
-    else 
+    else{ 
+    alert("Data submitted!")
     return true;
+    }
 }
 
 render(){
@@ -60,8 +62,7 @@ render(){
                  onChangeText = {(value) => this.setState({surname: value})}
                 />
                
-                <TouchableOpacity style = {styles.ButtonStyle} onPress = {()=>
-                    { this.make_Api_Call(); alert("Data submitted!")}}>
+                <TouchableOpacity style = {styles.ButtonStyle} onPress = {()=> this.make_Api_Call()}>
                     <Text style = {{color: 'white'}}>Submit</Text>
                 </TouchableOpacity>
 
